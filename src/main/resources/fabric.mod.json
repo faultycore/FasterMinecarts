@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "id": "scalingumbrella",
+  "id": "faster-minecarts",
   "version": "${version}",
 
-  "name": "scaling-umbrella",
-  "description": "This mod scales umbrellas.",
+  "name": "Faster Minecarts",
+  "description": "Increases the speed of minecarts.",
   "authors": [
     "ndrp"
   ],
@@ -19,11 +19,11 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.github.ndrp.scalingumbrella.ScalingUmbrella"
+      "com.github.ndrp.fasterminecarts.FasterMinecarts"
     ]
   },
   "mixins": [
-    "scalingumbrella.mixins.json"
+    "faster-minecarts.mixins.json"
   ],
 
   "depends": {

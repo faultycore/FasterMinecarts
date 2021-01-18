@@ -30,6 +30,8 @@ bin/
 
 # fabric
 
+eula.txt
+
 run/
 crash-reports/
 logs/
