@@ -1,29 +1,29 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "scalingumbrella",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "scaling-umbrella",
+  "description": "This mod scales umbrellas.",
   "authors": [
-    "Me!"
+    "ndrp"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "",
+    "sources": ""
   },
 
-  "license": "CC0-1.0",
+  "license": "GNU GPL3",
   "icon": "assets/modid/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "com.github.ndrp.scalingumbrella.ScalingUmbrella"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "scalingumbrella.mixins.json"
   ],
 
   "depends": {
