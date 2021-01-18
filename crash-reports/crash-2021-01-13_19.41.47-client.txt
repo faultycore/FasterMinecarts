@@ -1,0 +1,67 @@
+---- Minecraft Crash Report ----
+// There are four lights!
+
+Time: 13.01.21, 19:41
+Description: Initializing game
+
+java.lang.ExceptionInInitializerError
+	at net.minecraft.client.options.GameOptions.<init>(GameOptions.java:146)
+	at net.minecraft.client.MinecraftClient.<init>(MinecraftClient.java:440)
+	at net.minecraft.client.main.Main.main(Main.java:177)
+Caused by: java.lang.RuntimeException: java.lang.UnsatisfiedLinkError: Failed to locate library: lwjgl.dll
+	at net.minecraft.client.util.InputUtil.<clinit>(InputUtil.java:46)
+	... 3 more
+Caused by: java.lang.UnsatisfiedLinkError: Failed to locate library: lwjgl.dll
+	at org.lwjgl.system.Library.loadSystem(Library.java:147)
+	at org.lwjgl.system.Library.loadSystem(Library.java:67)
+	at org.lwjgl.system.Library.<clinit>(Library.java:50)
+	at org.lwjgl.system.MemoryAccessJNI.<clinit>(MemoryAccessJNI.java:13)
+	at org.lwjgl.system.Pointer.<clinit>(Pointer.java:28)
+	at org.lwjgl.system.Platform.mapLibraryNameBundled(Platform.java:80)
+	at org.lwjgl.glfw.GLFW.<clinit>(GLFW.java:674)
+	at java.base/jdk.internal.misc.Unsafe.ensureClassInitialized0(Native Method)
+	at java.base/jdk.internal.misc.Unsafe.ensureClassInitialized(Unsafe.java:1140)
+	at java.base/java.lang.invoke.DirectMethodHandle$EnsureInitialized.computeValue(DirectMethodHandle.java:359)
+	at java.base/java.lang.invoke.DirectMethodHandle$EnsureInitialized.computeValue(DirectMethodHandle.java:356)
+	at java.base/java.lang.ClassValue.getFromHashMap(ClassValue.java:226)
+	at java.base/java.lang.ClassValue.getFromBackup(ClassValue.java:208)
+	at java.base/java.lang.ClassValue.get(ClassValue.java:114)
+	at java.base/java.lang.invoke.DirectMethodHandle.checkInitialized(DirectMethodHandle.java:380)
+	at java.base/java.lang.invoke.DirectMethodHandle.ensureInitialized(DirectMethodHandle.java:370)
+	at java.base/java.lang.invoke.DirectMethodHandle.ensureInitialized(DirectMethodHandle.java:403)
+	at net.minecraft.client.util.InputUtil.<clinit>(InputUtil.java:43)
+	... 3 more
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at net.minecraft.client.options.GameOptions.<init>(GameOptions.java:146)
+	at net.minecraft.client.MinecraftClient.<init>(MinecraftClient.java:440)
+
+-- Initialization --
+Details:
+Stacktrace:
+	at net.minecraft.client.main.Main.main(Main.java:177)
+
+-- System Details --
+Details:
+	Minecraft Version: 1.16.4
+	Minecraft Version ID: 1.16.4
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 14.0.2, Oracle Corporation
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 857040384 bytes (817 MB) / 1488977920 bytes (1420 MB) up to 4276092928 bytes (4078 MB)
+	CPUs: 8
+	JVM Flags: 1 total; -XX:+ShowCodeDetailsInExceptionMessages
+	Launched Version: 1.16.4
+	Backend library: LWJGL version 3.2.2 build 10
+	Backend API: ~~ERROR~~ NoClassDefFoundError: Could not initialize class org.lwjgl.glfw.GLFW
+	GL Caps: 
+	Using VBOs: Yes
+	Is Modded: Very likely; Jar signature invalidated
+	Type: Client (map_client.txt)
+	CPU: <unknown>
