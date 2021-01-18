@@ -31,3 +31,5 @@ bin/
 # fabric
 
 run/
+crash-reports/
+logs/
