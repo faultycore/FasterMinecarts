@@ -5,7 +5,7 @@ If you are like me and like the thought of building long railways connecting you
 
 This mod increases the speed of all vanilla minecarts from 8m/s to 30m/s. Additionally, minecarts will be automatically slowed down around corners so as to prevent them from derailing at those speeds.
 
---
+------
 
 This mod requires the **Fabric mod loader**.
 
