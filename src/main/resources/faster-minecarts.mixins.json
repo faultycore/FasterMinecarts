@@ -4,7 +4,8 @@
   "package": "com.github.ndrp.fasterminecarts.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-  	"AbstractMinecartEntityMixin"
+  	"AbstractMinecartEntityMixin",
+  	"FurnaceMinecartEntityMixin"
   ],
   "client": [
   ],

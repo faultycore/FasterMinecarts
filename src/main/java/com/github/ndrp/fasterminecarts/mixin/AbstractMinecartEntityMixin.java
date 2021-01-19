@@ -25,7 +25,7 @@ public abstract class AbstractMinecartEntityMixin extends Entity {
 	}
 	
 	@Inject(method = "getMaxOffRailSpeed", at = @At("HEAD"), cancellable = true)
-	private void onGetMaxOffRailSpeed(CallbackInfoReturnable<Double> cir) {
+	protected void onGetMaxOffRailSpeed(CallbackInfoReturnable<Double> cir) {
 		
 		final double topSpeed = 1.6;
 		
