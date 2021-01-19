@@ -73,11 +73,10 @@ public abstract class AbstractMinecartEntityMixin extends Entity {
 	 */
 	private RailShape getRailShapeAtOffset(Vec3i railOffset, BlockPos blockPos) {
 		
-		BlockPos adjBlockPos = blockPos.add(railOffset);
-		BlockState state = this.world.getBlockState(adjBlockPos);
+		BlockState state = this.world.getBlockState(blockPos.add(railOffset));
 		
 		if (state.getBlock() instanceof AbstractRailBlock) {
-			AbstractRailBlock abstractRailBlock = (AbstractRailBlock) state.getBlock();
+			AbstractRailBlock abstractRailBlock = (AbstractRailBlock)state.getBlock();
 			RailShape railShape = (RailShape) state.get(abstractRailBlock.getShapeProperty());
 			return railShape;
 		} else {
