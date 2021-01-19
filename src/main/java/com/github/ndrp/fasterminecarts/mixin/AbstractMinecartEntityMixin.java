@@ -26,18 +26,26 @@ public abstract class AbstractMinecartEntityMixin extends Entity {
 	@Inject(method = "getMaxOffRailSpeed", at = @At("HEAD"), cancellable = true)
 	private void onGetMaxOffRailSpeed(CallbackInfoReturnable<Double> cir) {
 		
+		final double topSpeed = 1.6;
+		
+		Vec3d v = this.getVelocity();
+		
+		if (Math.abs(v.getX()) < 0.5 && Math.abs(v.getZ()) < 0.5) { // return early if at a speed where we can't possibly derail
+			cir.setReturnValue(topSpeed);
+			return;
+		}
+		
 		BlockPos blockPos = this.getBlockPos();
 		BlockState state = this.world.getBlockState(blockPos);
 		
 		if (state.getBlock() instanceof AbstractRailBlock) {
-			final double slowdownSpeed = 0.2D;
-			final double topSpeed = 1.6D;
+			final double slowdownSpeed = 0.3;
 			final int additionalOffset = 1;
 			final int offset = (int)topSpeed + additionalOffset;
 			
 			AbstractRailBlock abstractRailBlock = (AbstractRailBlock)state.getBlock();
-			RailShape railShape = (RailShape) state.get(abstractRailBlock.getShapeProperty());
-			Vec3i nextRailOffset = getNextRailOffsetByVelocity(railShape);
+			RailShape railShape = (RailShape)state.get(abstractRailBlock.getShapeProperty());
+			Vec3i nextRailOffset = getNextRailOffsetByVelocity(railShape, v);
 			
 			if (nextRailOffset == null) {
 				cir.setReturnValue(slowdownSpeed);
@@ -87,16 +95,14 @@ public abstract class AbstractMinecartEntityMixin extends Entity {
 	/*
 	 * Returns null if the rail is a curved rail
 	 */
-	private Vec3i getNextRailOffsetByVelocity(RailShape railShape) {
-		
-		Vec3d v = this.getVelocity();
+	private Vec3i getNextRailOffsetByVelocity(RailShape railShape, Vec3d velocity) {
 		
 		if (railShape == RailShape.EAST_WEST) {
-			double x = v.getX();
+			double x = velocity.getX();
 			x = (x > 0) ? 1 : ((x == 0) ? 0 : -1);
 			return new Vec3i(x, 0, 0);
 		} else if (railShape == RailShape.NORTH_SOUTH) {
-			double z = v.getZ();
+			double z = velocity.getZ();
 			z = (z > 0) ? 1 : ((z == 0) ? 0 : -1);
 			return new Vec3i(0, 0, z);
 		}

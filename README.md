@@ -8,6 +8,6 @@ This mod increases the speed of all vanilla minecarts from 8m/s to 30m/s. Additi
 
 ---
 
-This mod requires the **Fabric mod loader and API**.
+This mod requires **Fabric**.
 
 
