@@ -14,6 +14,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import com.github.ndrp.fasterminecarts.MinecartUtility;
 
 @Mixin(AbstractMinecartEntity.class)
 public abstract class AbstractMinecartEntityMixin extends Entity {
@@ -45,7 +46,7 @@ public abstract class AbstractMinecartEntityMixin extends Entity {
 			
 			AbstractRailBlock abstractRailBlock = (AbstractRailBlock)state.getBlock();
 			RailShape railShape = (RailShape)state.get(abstractRailBlock.getShapeProperty());
-			Vec3i nextRailOffset = getNextRailOffsetByVelocity(railShape, v);
+			Vec3i nextRailOffset = MinecartUtility.getNextRailOffsetByVelocity(railShape, v);
 			
 			if (nextRailOffset == null) {
 				cir.setReturnValue(slowdownSpeed);
@@ -55,7 +56,7 @@ public abstract class AbstractMinecartEntityMixin extends Entity {
 			for (int i = 0; i <= offset; i++) {	
 				RailShape railShapeAtOffset = null;
 				
-				railShapeAtOffset = getRailShapeAtOffset(new Vec3i(nextRailOffset.getX() * i, 0, nextRailOffset.getZ() * i), blockPos);
+				railShapeAtOffset = MinecartUtility.getRailShapeAtOffset(new Vec3i(nextRailOffset.getX() * i, 0, nextRailOffset.getZ() * i), blockPos, this.world);
 				
 				if (railShapeAtOffset == null) {
 					cir.setReturnValue(slowdownSpeed);
@@ -74,39 +75,6 @@ public abstract class AbstractMinecartEntityMixin extends Entity {
 			}
 			cir.setReturnValue(topSpeed);
 		} 
-	}
-	
-	/*
-	 * Returns null if the block at the given offset is not a rail
-	 */
-	private RailShape getRailShapeAtOffset(Vec3i railOffset, BlockPos blockPos) {
-		
-		BlockState state = this.world.getBlockState(blockPos.add(railOffset));
-		
-		if (state.getBlock() instanceof AbstractRailBlock) {
-			AbstractRailBlock abstractRailBlock = (AbstractRailBlock)state.getBlock();
-			RailShape railShape = (RailShape) state.get(abstractRailBlock.getShapeProperty());
-			return railShape;
-		} else {
-			return null;
-		}
-	}
-	
-	/*
-	 * Returns null if the rail is a curved rail
-	 */
-	private Vec3i getNextRailOffsetByVelocity(RailShape railShape, Vec3d velocity) {
-		
-		if (railShape == RailShape.EAST_WEST) {
-			double x = velocity.getX();
-			x = (x > 0) ? 1 : ((x == 0) ? 0 : -1);
-			return new Vec3i(x, 0, 0);
-		} else if (railShape == RailShape.NORTH_SOUTH) {
-			double z = velocity.getZ();
-			z = (z > 0) ? 1 : ((z == 0) ? 0 : -1);
-			return new Vec3i(0, 0, z);
-		}
-		return null;
 	}
 }
 
