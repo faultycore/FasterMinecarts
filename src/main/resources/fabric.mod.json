@@ -20,6 +20,9 @@
   "entrypoints": {
     "main": [
       "com.github.ndrp.fasterminecarts.FasterMinecarts"
+    ],
+    "modmenu": [
+        "com.github.ndrp.fasterminecarts.config.FasterMinecartsModMenuIntegration"
     ]
   },
   "mixins": [
@@ -28,9 +31,11 @@
 
   "depends": {
     "fabricloader": ">=0.7.4",
-    "minecraft": "1.16.x"
+    "minecraft": "1.16.x",
+    "cloth-config2": "*",
+    "autoconfig1u": "*"
   },
   "suggests": {
-    "another-mod": "*"
+    "modmenu": "*"
   }
 }
