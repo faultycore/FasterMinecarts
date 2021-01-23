@@ -3,6 +3,7 @@
     "text.autoconfig.faster-minecarts.category.default": "General",
     "text.autoconfig.faster-minecarts.option.automaticMinecartSlowDown": "automaticMinecartSlowdown",
     "text.autoconfig.faster-minecarts.option.maxSpeed": "maxSpeed",
-    "text.autoconfig.faster-minecarts.option.automaticMinecartSlowDown.@Tooltip": "Enable automatic slowdown to prevent derailing. You can use soul sand to slow down manually!",
-    "text.autoconfig.faster-minecarts.option.maxSpeed.@Tooltip": "Change the maximum speed. Zero is vanilla value."
+    "text.autoconfig.faster-minecarts.option.automaticMinecartSlowDown.@Tooltip[0]": "Enable automatic slowdown to prevent derailing.",
+    "text.autoconfig.faster-minecarts.option.automaticMinecartSlowDown.@Tooltip[1]": "You can use soul sand to slow down manually!",
+    "text.autoconfig.faster-minecarts.option.maxSpeed.@Tooltip": "Change the maximum speed. Vanilla value is 0, default is 8."
 }

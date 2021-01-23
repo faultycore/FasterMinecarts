@@ -13,7 +13,7 @@ public class FasterMinecartsConfig implements ConfigData {
 	@ConfigEntry.Gui.Excluded
 	public double slowSpeed = 0.3;
 	
-	@ConfigEntry.Gui.Tooltip()
+	@ConfigEntry.Gui.Tooltip(count = 2)
 	@ConfigEntry.Category("default")
     public boolean automaticMinecartSlowDown = true;
 	
