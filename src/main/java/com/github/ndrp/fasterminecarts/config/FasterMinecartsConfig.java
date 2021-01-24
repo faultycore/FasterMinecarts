@@ -11,14 +11,18 @@ import net.fabricmc.api.EnvType;
 public class FasterMinecartsConfig implements ConfigData {
 	
 	@ConfigEntry.Gui.Excluded
-	public double slowSpeed = 0.3;
-	
+	private double slowSpeed = 0.3;
+
 	@ConfigEntry.Gui.Tooltip(count = 2)
 	@ConfigEntry.Category("default")
-    public boolean automaticMinecartSlowDown = true;
+    private boolean automaticMinecartSlowDown = true;
 	
 	@ConfigEntry.Gui.Tooltip()
 	@ConfigEntry.BoundedDiscrete(max = 12)
 	@ConfigEntry.Category("default")
-    public int maxSpeed = 8;
+    private int maxSpeed = 8;
+	
+	public boolean getAutomaticMinecartSlowDown() {  return automaticMinecartSlowDown; }
+	public double getSlowSpeed() { return slowSpeed; }
+	public double getMaxSpeed() { return 0.4 + maxSpeed / 10D; }
 }
