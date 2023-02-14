@@ -38,7 +38,7 @@ public abstract class AbstractMinecartEntityMixin extends Entity {
 
 		Block under = world.getBlockState(getBlockPos().down()).getBlock();
 		// Return if above soul sand
-		if (!(state.getBlock() instanceof AbstractRailBlock) || config.soulSandSlowDown || under instanceof SoulSandBlock) {
+		if (!(state.getBlock() instanceof AbstractRailBlock) || (under instanceof SoulSandBlock && !(config.soulSandSlowDown))) {
 			cir.setReturnValue(slowSpeed);
 			return;
 		}

@@ -17,7 +17,7 @@ public class FasterMinecartsConfig implements ConfigData {
 	public boolean soulSandSlowDown = true;
 	
 	@ConfigEntry.Gui.Tooltip()
-	@ConfigEntry.BoundedDiscrete(min=1, max = 12)
+	@ConfigEntry.BoundedDiscrete(min=8, max = 32)
 	@ConfigEntry.Category("default")
     public int maxSpeed = 30;
 
