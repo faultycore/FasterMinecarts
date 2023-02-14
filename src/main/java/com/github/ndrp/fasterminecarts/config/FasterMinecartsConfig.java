@@ -1,28 +1,21 @@
 package com.github.ndrp.fasterminecarts.config;
 
-import me.shedaniel.autoconfig.ConfigData;
-import me.shedaniel.autoconfig.annotation.Config;
-import me.shedaniel.autoconfig.annotation.ConfigEntry;
+import me.sargunvohra.mcmods.autoconfig1u.ConfigData;
+import me.sargunvohra.mcmods.autoconfig1u.annotation.Config;
+import me.sargunvohra.mcmods.autoconfig1u.annotation.ConfigEntry;
 
 @Config(name = "faster-minecarts")
 public class FasterMinecartsConfig implements ConfigData {
-
 	
-	@ConfigEntry.Gui.Tooltip()
+	@ConfigEntry.Gui.Excluded
+	public double slowSpeed = 0.3;
+	
+	@ConfigEntry.Gui.Tooltip(count = 2)
 	@ConfigEntry.Category("default")
     public boolean automaticMinecartSlowDown = true;
-
-	@ConfigEntry.Gui.Tooltip()
-	@ConfigEntry.Category("default")
-	public boolean soulSandSlowDown = true;
 	
 	@ConfigEntry.Gui.Tooltip()
-	@ConfigEntry.BoundedDiscrete(min=1, max = 12)
+	@ConfigEntry.BoundedDiscrete(max = 12)
 	@ConfigEntry.Category("default")
-    public int maxSpeed = 30;
-
-	@ConfigEntry.Gui.Tooltip()
-	@ConfigEntry.BoundedDiscrete(min = 1, max = 8)
-	@ConfigEntry.Category("default")
-	public int slowSpeed = 6;
+    public int maxSpeed = 8;
 }

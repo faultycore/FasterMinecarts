@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import com.github.ndrp.fasterminecarts.config.FasterMinecartsConfig;
 import com.github.ndrp.fasterminecarts.util.MinecartUtility;
-import me.shedaniel.autoconfig.AutoConfig;
+import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 
 @Mixin(AbstractMinecartEntity.class)
 public abstract class AbstractMinecartEntityMixin extends Entity {
@@ -31,37 +31,36 @@ public abstract class AbstractMinecartEntityMixin extends Entity {
 	@Inject(method = "getMaxOffRailSpeed", at = @At("HEAD"), cancellable = true)
 	protected void onGetMaxOffRailSpeed(CallbackInfoReturnable<Double> cir) {
 		FasterMinecartsConfig config = AutoConfig.getConfigHolder(FasterMinecartsConfig.class).getConfig();
-		BlockPos blockPos = this.getBlockPos();
-		BlockState state = this.world.getBlockState(blockPos);
-		double slowSpeed = (config.slowSpeed/20D);
-		double maxSpeed = (config.maxSpeed/20D);
-
-		Block under = world.getBlockState(getBlockPos().down()).getBlock();
-		// Return if above soul sand
-		if (!(state.getBlock() instanceof AbstractRailBlock) || config.soulSandSlowDown || under instanceof SoulSandBlock) {
-			cir.setReturnValue(slowSpeed);
-			return;
-		}
 
 		if (config.automaticMinecartSlowDown) {
+			BlockPos blockPos = this.getBlockPos();
+			BlockState state = this.world.getBlockState(blockPos);
+			Block under = world.getBlockState(getBlockPos().down()).getBlock();
+
+			// Return if above soul sand
+			// Can't place rails on honey blocks
+			if (!(state.getBlock() instanceof AbstractRailBlock) || under instanceof SoulSandBlock) {
+				cir.setReturnValue(config.slowSpeed);
+				return;
+			}
 
 			Vec3d v = this.getVelocity();
 
 			if (Math.abs(v.getX()) < 0.5 && Math.abs(v.getZ()) < 0.5) { // Return early if at a speed where we can't
 																		// possibly derail
-				cir.setReturnValue(maxSpeed);
+				cir.setReturnValue(0.4 + config.maxSpeed / 10D);
 				return;
 			}
 
 			final int additionalOffset = 1;
-			final int offset = (int) (maxSpeed) + additionalOffset;
+			final int offset = (int) (0.4 + config.maxSpeed / 10D) + additionalOffset;
 
 			AbstractRailBlock abstractRailBlock = (AbstractRailBlock) state.getBlock();
 			RailShape railShape = (RailShape) state.get(abstractRailBlock.getShapeProperty());
 			Vec3i nextRailOffset = MinecartUtility.getNextRailOffsetByVelocity(railShape, v);
 
 			if (nextRailOffset == null) {
-				cir.setReturnValue(slowSpeed);
+				cir.setReturnValue(config.slowSpeed);
 				return;
 			}
 
@@ -72,7 +71,7 @@ public abstract class AbstractMinecartEntityMixin extends Entity {
 						new Vec3i(nextRailOffset.getX() * i, 0, nextRailOffset.getZ() * i), blockPos, this.world);
 
 				if (railShapeAtOffset == null) {
-					cir.setReturnValue(slowSpeed);
+					cir.setReturnValue(config.slowSpeed);
 					return;
 				}
 
@@ -81,16 +80,22 @@ public abstract class AbstractMinecartEntityMixin extends Entity {
 				case SOUTH_WEST:
 				case NORTH_WEST:
 				case NORTH_EAST:
-					cir.setReturnValue(slowSpeed);
+					cir.setReturnValue(config.slowSpeed);
 					return;
 				default:
 				}
 			}
-			cir.setReturnValue(maxSpeed);
+			cir.setReturnValue(0.4 + config.maxSpeed / 10D);
 
 		} else {
-
-				cir.setReturnValue(maxSpeed);
+			Block under = world.getBlockState(getBlockPos().down()).getBlock();
+			// Can't place rails on honey blocks
+			if (!(world.getBlockState(getBlockPos()).getBlock() instanceof AbstractRailBlock)
+					|| under instanceof SoulSandBlock) {
+				cir.setReturnValue(config.slowSpeed);
+			} else {
+				cir.setReturnValue(0.4 + config.maxSpeed / 10D);
+			}
 		}
 	}
 }

@@ -1,13 +1,18 @@
 package com.github.ndrp.fasterminecarts.config;
 
-import com.terraformersmc.modmenu.api.ConfigScreenFactory;
-import com.terraformersmc.modmenu.api.ModMenuApi;
-import me.shedaniel.autoconfig.AutoConfig;
+import io.github.prospector.modmenu.api.ConfigScreenFactory;
+import io.github.prospector.modmenu.api.ModMenuApi;
+import me.sargunvohra.mcmods.autoconfig1u.AutoConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 
 @Environment(EnvType.CLIENT)
-public class FasterMinecartsModMenuIntegration implements ModMenuApi {
+public class FasterMinecartsModMenuIntegration implements ModMenuApi {	
+	
+    @Override
+    public String getModId() {
+        return "faster-minecarts";
+    }
 
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
